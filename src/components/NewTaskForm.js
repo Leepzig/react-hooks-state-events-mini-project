@@ -1,16 +1,19 @@
 import React from "react";
 
-function NewTaskForm() {
+function NewTaskForm(props) {
+
+  const categoryArray = props.CATEGORIES.map( category => <option key={props.addKey()} value={category}>{category}</option>)
+
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={props.addTask}>
       <label>
         Details
-        <input type="text" name="text" />
+        <input onChange={props.getNewTask}  type="text" name="text" value={props.newTask.text}/>
       </label>
       <label>
         Category
-        <select name="category">
-          {/* render <option> elements for each category here */}
+        <select onChange={props.getNewTask} value={props.newTask.category} name="category">
+          {categoryArray}
         </select>
       </label>
       <input type="submit" value="Add task" />
